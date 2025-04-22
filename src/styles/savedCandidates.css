@@ -3,3 +3,11 @@
     flex-direction: column;
     width: 500px;
 }
+
+.table-style {
+    padding: 8px;
+}
+
+.header {
+    text-align: center;
+}

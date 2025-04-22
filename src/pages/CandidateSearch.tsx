@@ -1,27 +1,45 @@
 import { useState, useEffect } from "react";
-import { searchGithub, searchGithubUser } from "../api/API";
+import { searchGithub } from "../api/API";
 import CandidateCard from "../components/candidate-card/CandidateCard";
+import Button from "../components/buttons/Button";
+import Candidate from "../interfaces/Candidate.interface";
 import "../styles/candidateSearch.css";
 
-const dummyUser = {
-  name: "Ken",
-  username: "Ken1",
-  location: "Raleigh",
-  avatar:
-    "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
-  email: "Ken@gmail.com",
-  company: "Amazon",
-  bio: "Ready to work",
-};
 const CandidateSearch = () => {
+  const [githubUsers, setGithubUser] = useState<Candidate[]>([])
+  const [githubUserIndex, setGithubUserIndex] = useState(0)
+  useEffect(() => {
+    console.log('localStorage', localStorage.getItem('potentialCandidates'))
+    searchGithub().then((users) => {
+      for(const user of users) {
+      const {login, username, location, avatar_url, email, company, bio} = user
+      const newUser: Candidate = {name: login, username: username || 'unknown', location: location || 'unknown', avatar: avatar_url, email: email || 'unknown', company: company || 'unknown', bio: bio || 'bio'}
+      setGithubUser(prev => [...prev,newUser])
+      }
+      
+    })
+  }, [])
+
+  const viewNextCandidate = () => {
+    setGithubUserIndex(prev => prev+1)
+  }
+
+  const addToPotentialCandidates = () => {
+    const potentialCandidates = JSON.parse(localStorage.getItem('potentialCandidates') || '[]')
+    
+    potentialCandidates.push(githubUsers[githubUserIndex])
+    localStorage.setItem('potentialCandidates', JSON.stringify(potentialCandidates))  
+    viewNextCandidate()
+  }
+
   return (
     <div className="container">
       <h1>Candidate Search</h1>
       <div>
-        <CandidateCard user={dummyUser} />
+      { githubUsers.length > 0 && <CandidateCard user={githubUsers[githubUserIndex]} />}
         <div className="buttons">
-          <button>-</button>
-          <button>+</button>
+          <Button minus onClick={viewNextCandidate}/>
+          <Button onClick={addToPotentialCandidates}/>
         </div>
       </div>
     </div>

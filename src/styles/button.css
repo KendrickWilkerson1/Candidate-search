@@ -1,0 +1,13 @@
+.button {
+    border-radius: 100%;
+    width: 60px;
+    height: 60px;
+    outline: none;
+    border: none;
+    font-size: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    text-align: center;
+}

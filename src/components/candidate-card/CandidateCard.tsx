@@ -1,4 +1,3 @@
-import React from "react";
 import "../../styles/candidateCard.css";
 import Candidate from "../../interfaces/Candidate.interface";
 interface CandidateCardProps {
@@ -6,6 +5,7 @@ interface CandidateCardProps {
 }
 
 const CandidateCard = ({ user }: CandidateCardProps) => {
+  console.log("this is user", user)
   const { name, username, location, avatar, email, company, bio } = user;
   return (
     <div className="candidateCard">

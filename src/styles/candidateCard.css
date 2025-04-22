@@ -17,31 +17,6 @@
     margin-top: 15px;
 }
 
-.buttons button {
-    border-radius: 100%;
-    width: 60px;
-    height: 60px;
-    background-color: white;
-    outline: none;
-    border: none;
-    font-size: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: black;
-    text-align: center;
-}
-
-.buttons button:first-child {
-    background-color: red;
-    font-size: 50px;
-    padding-bottom: 8px;
-}
-
-.buttons button:nth-child(2) {
-    background-color: green;
-}
-
 .candidateCard img {
     height: 250px;
     width: 300px;
