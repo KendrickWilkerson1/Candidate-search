@@ -1,14 +1,11 @@
 const searchGithub = async () => {
-  console.log("=====", import.meta.env.VITE_GITHUB_TOKEN)
   try {
     const start = Math.floor(Math.random() * 100000000) + 1;
-    // console.log(import.meta.env);
     const response = await fetch(
       `https://api.github.com/users?since=${start}`,
       {
         headers: {
-          // Authorization: `Bearer ${import.meta.env.VITE_GITHUB_TOKEN}`,
-          Authorization: `Bearer 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`,
+          Authorization: `Bearer ${import.meta.env.VITE_GITHUB_TOKEN}`,
 
         },
       }
